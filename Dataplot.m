@@ -1,18 +1,8 @@
-L1data = readtable("L1Data.csv")
-L2data = readtable("L2Data.csv")
-SWEdata = readtable("WI_K0_SWE_74093.csv")
+% yyyy-MM-dd'T'HH:mm:ss.SSS'Z' time format
 
 
-L1datatt = table2timetable(L1data)
-L2datatt = table2timetable(L2data)
-
+L2datatt = table2timetable(L1Dataraw)
 figure(1)
-L1plot = stackedplot(L1datatt)
+L1plot = stackedplot(L2datatt)
+L1plot.Color = [0 0 0]
 grid on
-figure(2)
-L2plot = stackedplot(L2datatt)
-grid on 
-
-
-figure(3)
-stackedplot(SWEdata)
