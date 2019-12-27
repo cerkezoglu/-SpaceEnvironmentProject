@@ -277,7 +277,7 @@ with open("L2table1.txt", "w") as L2data:
         L2data.write("," + str(i))
     L2data.write("\n")
 
-with open("L1Dataraw.csv", "r") as l1:
+with open("L1Datarawtable1.csv", "r") as l1:
     L1_reader = csv.reader(l1)
     next(L1_reader)
     L1B_x = []
@@ -373,7 +373,7 @@ with open("L1Dataraw.csv", "r") as l1:
     fourthline = [L1Vtot_min_sw, L1Vtot_max_sw, L1Vtot_mean_sw, L1Vtot_min_msh, L1Vtot_max_msh, L1Vtot_mean_msh,
                   L1Vtot_min_msp, L1Vtot_max_msp, L1Vtot_mean_msp]
 
-    with open("L1table1.txt", "w") as L1data:
+    with open("L1table1.csv", "w") as L1data:
 
         L1data.write("B_tot")
         for i in firstline:
@@ -409,7 +409,30 @@ with open("L1Dataraw.csv", "r") as l1:
         L1V_z = []
         L1V_tot = []
         L1P_dyn = []
-
+        l1bx = []
+        l1by = []
+        l1bz = []
+        l1btot = []
+        l1n = []
+        l1t = []
+        l1vx = []
+        l1vy = []
+        l1vz = []
+        l1vtot = []
+        l1pdyn = []
+        l1time = []
+        j = 1
+        sumbx = 0
+        sumby = 0
+        sumbz = 0
+        sumbtot = 0
+        sumn = 0
+        sumt = 0
+        sumvx = 0
+        sumvy = 0
+        sumvz = 0
+        sumvtot = 0
+        sump = 0
         for line in L1_reader:
             time = line[0]
             bx = float(line[1])
@@ -423,6 +446,7 @@ with open("L1Dataraw.csv", "r") as l1:
             vz = float(line[9])
             vtot = float(line[10])
             pdyn = float(line[11])
+
             L1_time = time
             L1B_x.append(bx)
             L1B_y.append(by)
@@ -435,571 +459,48 @@ with open("L1Dataraw.csv", "r") as l1:
             L1V_z.append(vz)
             L1V_tot.append(vtot)
             L1P_dyn.append(pdyn)
-            l1bx = []
-            l1by = []
-            l1bz = []
-            l1btot = []
-            l1n = []
-            l1t = []
-            l1vx = []
-            l1vy = []
-            l1vz = []
-            l1vtot = []
-            l1pdyn = []
+            print(L1_time)
 
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-        for i in range(0, 9):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
+            if j <= 3:
+                sumbx += bx
+                sumby += by
+                sumbz += bz
+                sumbtot += btot
+                sumn += n
+                sumt += t
+                sumvx += vx
+                sumvy += vy
+                sumvz += vz
+                sumvtot += vtot
+                sump += pdyn
+                if j ==3:
+                    l1time.append(time)
+                    l1bx.append(sumbx/3)
+                    l1by.append(sumby/3)
+                    l1bz.append(sumbz/3)
+                    l1btot.append(sumbtot/3)
+                    l1n.append(sumn/3)
+                    l1t.append(sumt/3)
+                    l1vx.append(sumvx/3)
+                    l1vy.append(sumvy/3)
+                    l1vz.append(sumvz/3)
+                    l1vtot.append(sumvtot/3)
+                    l1pdyn.append(sump/3)
 
-        l1bx.append(sumbx / 10)
-        l1by.append(sumby / 10)
-        l1bz.append(sumbz / 10)
-        l1btot.append(sumbtot / 10)
-        l1n.append(sumn / 10)
-        l1t.append(sumt / 10)
-        l1vx.append(sumvx / 10)
-        l1vy.append(sumvy / 10)
-        l1vz.append(sumvz / 10)
-        l1vtot.append(sumvtot / 10)
-        l1pdyn.append(sump / 10)
+                    sumbx = 0
+                    sumby = 0
+                    sumbz = 0
+                    sumbtot = 0
+                    sumn = 0
+                    sumt = 0
+                    sumvx = 0
+                    sumvy = 0
+                    sumvz = 0
+                    sumvtot = 0
+                    sump = 0
+                    j = 0
+                j +=1
 
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(10, 19):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 10)
-        l1by.append(sumby / 10)
-        l1bz.append(sumbz / 10)
-        l1btot.append(sumbtot / 10)
-        l1n.append(sumn / 10)
-        l1t.append(sumt / 10)
-        l1vx.append(sumvx / 10)
-        l1vy.append(sumvy / 10)
-        l1vz.append(sumvz / 10)
-        l1vtot.append(sumvtot / 10)
-        l1pdyn.append(sump / 10)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(20, 28):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(29, 37):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(38, 45):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 8)
-        l1by.append(sumby / 8)
-        l1bz.append(sumbz / 8)
-        l1btot.append(sumbtot / 8)
-        l1n.append(sumn / 8)
-        l1t.append(sumt / 8)
-        l1vx.append(sumvx / 8)
-        l1vy.append(sumvy / 8)
-        l1vz.append(sumvz / 8)
-        l1vtot.append(sumvtot / 8)
-        l1pdyn.append(sump / 8)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(46, 55):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 10)
-        l1by.append(sumby / 10)
-        l1bz.append(sumbz / 10)
-        l1btot.append(sumbtot / 10)
-        l1n.append(sumn / 10)
-        l1t.append(sumt / 10)
-        l1vx.append(sumvx / 10)
-        l1vy.append(sumvy / 10)
-        l1vz.append(sumvz / 10)
-        l1vtot.append(sumvtot / 10)
-        l1pdyn.append(sump / 10)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(56, 64):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(65, 73):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(74, 82):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(83, 91):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(92, 101):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 10)
-        l1by.append(sumby / 10)
-        l1bz.append(sumbz / 10)
-        l1btot.append(sumbtot / 10)
-        l1n.append(sumn / 10)
-        l1t.append(sumt / 10)
-        l1vx.append(sumvx / 10)
-        l1vy.append(sumvy / 10)
-        l1vz.append(sumvz / 10)
-        l1vtot.append(sumvtot / 10)
-        l1pdyn.append(sump / 10)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(102, 110):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(111, 119):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(120, 128):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 9)
-        l1by.append(sumby / 9)
-        l1bz.append(sumbz / 9)
-        l1btot.append(sumbtot / 9)
-        l1n.append(sumn / 9)
-        l1t.append(sumt / 9)
-        l1vx.append(sumvx / 9)
-        l1vy.append(sumvy / 9)
-        l1vz.append(sumvz / 9)
-        l1vtot.append(sumvtot / 9)
-        l1pdyn.append(sump / 9)
-
-        sumbx = 0
-        sumby = 0
-        sumbz = 0
-        sumbtot = 0
-        sumn = 0
-        sumt = 0
-        sumvx = 0
-        sumvy = 0
-        sumvz = 0
-        sumvtot = 0
-        sump = 0
-
-        for i in range(129, 139):
-            sumbx += L1B_x[i]
-            sumby += L1B_y[i]
-            sumbz += L1B_z[i]
-            sumbtot += L1B_tot[i]
-            sumn += L1N[i]
-            sumt += L1T[i]
-            sumvx += L1V_x[i]
-            sumvy += L1V_y[i]
-            sumvz += L1V_z[i]
-            sumvtot += L1V_tot[i]
-            sump += L1P_dyn[i]
-
-        l1bx.append(sumbx / 11)
-        l1by.append(sumby / 11)
-        l1bz.append(sumbz / 11)
-        l1btot.append(sumbtot / 11)
-        l1n.append(sumn / 11)
-        l1t.append(sumt / 11)
-        l1vx.append(sumvx / 11)
-        l1vy.append(sumvy / 11)
-        l1vz.append(sumvz / 11)
-        l1vtot.append(sumvtot / 11)
-        l1pdyn.append(sump / 11)
 
 B_0 = 0.3 * 10 ** (-4)  # Tesla or MKS
 M_p = 1.67 * 10 ** (-27)  # Proton mass (kg)
@@ -1034,3 +535,110 @@ rmp_av = sum(l1Rmp) / len(l1Rmp)
 rbs_min = min(l1Rbs)
 rbs_max = max(l1Rbs)
 rbs_av = sum(l1Rbs) / len(l1Rbs)
+
+
+with open("L2Datarawtable1.csv","r") as L2d2 :
+
+    L2d2_reader = csv.reader(L2d2)
+    next(L2d2_reader)
+
+    L2B_tot = []  # nT
+    L2B_x = []  # nT
+    L2B_y = []  # nT
+    L2B_z = []  # nT
+    L2V_x = []
+    L2V_y = []
+    L2V_z = []
+    L2V_tot = []
+    L2time_fake = []
+    L2time = []
+    L2v_xfake = []
+    L2v_yfake = []
+    L2v_zfake = []
+    L2_tfake = []
+    L2_nfake = []
+    L2B_totfake = []  # nT
+    L2B_xfake = []  # nT
+    L2B_yfake = []  # nT
+    L2B_zfake = []  # nT
+    L2T =[]
+    L2N =[]
+    # Time,IMF B_x,IMF B_y,IMF B_z,IMF B_tot,n,T,V_x,V_y,V_z,V_tot
+    i =1
+    sbx = 0
+    sby = 0
+    sbz = 0
+    sbtot = 0
+    sn = 0
+    st = 0
+    svx = 0
+    svy = 0
+    svz = 0
+    svtot = 0
+
+    for line in L2d2_reader:
+        ti = line[0]
+        bx = float(line[1])
+        by = float(line[2])
+        bz = float(line[3])
+        btot = float(line[4])
+        nn  = float(line[5])
+        tt = float(line[6])
+        vxx = float(line[7])
+        vyy = float(line[8])
+        vzz = float(line[9])
+        vtoot = float(line[10])
+
+
+
+        if i <= 100:
+            sbx += bx
+            sby += by
+            sbz += bz
+            sbtot += btot
+            sn += nn
+            st += tt
+            svx += vxx
+            svy += vyy
+            svz += vzz
+            svtot += vtoot
+
+            if i == 100:
+                L2B_x.append(sbx/100)
+                L2B_y.append(sby/100)
+                L2B_z.append(sbz/100)
+                L2B_tot.append(sbtot/100)
+                L2N.append(sn/100)
+                L2T.append(st/100)
+                L2V_x.append(svx/100)
+                L2V_y.append(svy/100)
+                L2V_z.append(svz/100)
+                L2V_tot.append(svtot/100)
+                L2time.append(ti)
+
+                sbx = 0
+                sby = 0
+                sbz = 0
+                sbtot = 0
+                sn = 0
+                st = 0
+                svx = 0
+                svy = 0
+                svz = 0
+                svtot = 0
+
+                i = 1
+        i += 1
+
+print(len(L2T))
+with open("TotalTable2.csv", "w") as Taa:
+    labels = ["L1time", "L1bx", "L1by", "L1bz", "L1btot", "L1n", "L1T", "L1V_x", "L1V_y", "L1V_z", "L1V_tot", "L1P_dyn", "L2time", "L2bx","L2by","L2bz","L2btot","L2n","L2T","L2V_x", "L2V_y", "L2V_z", "L2V_tot","Rmp","Rbs","Long"]
+    writer = csv.DictWriter(Taa, fieldnames=labels)
+    writer.writeheader()
+
+    for j in range(len(L2time)):
+        writer.writerow({"L1time": L2time[j][11:16], "L1bx": l1bx[j], "L1by": l1by[j], "L1bz" : l1bz[j], "L1btot" : l1btot[j], "L1n" : l1n[j], "L1T": l1t[j], "L1V_x" : l1vx[j], "L1V_y" : l1vy[j], "L1V_z" : l1vz[j], "L1V_tot": l1vtot[j] , "L1P_dyn" : l1pdyn[j], "L2time" : L2time[-j][11:16], "L2bx" : L2B_x[j],"L2by" : L2B_y[j],"L2bz": L2B_z[j],"L2btot" : L2B_tot[j],"L2n" : L2N[j]   ,"L2T": L2T[j],"L2V_x": L2V_x[j], "L2V_y": L2V_y[j], "L2V_z": L2V_z[j], "L2V_tot": L2V_tot[j],"Rmp": l1Rmp[j],"Rbs": l1Rbs[j],"Long" : l1long[j]})
+
+
+
+

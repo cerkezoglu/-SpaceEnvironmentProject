@@ -36,7 +36,7 @@ with open("WI_K0_SWE_74093.csv", "r") as SWE:
         v_x_sum += x
         v_x_sum += V_x[i]
         T.append(((th_sw ** 2) * M_p * (10 ** 6)) / (3 * k))  # unit (K)
-        P_dyn.append(2 * n * M_p * V_tot[i] ** 2 * 10 ** 21)  # calculated to unit nPa
+        P_dyn.append( (n * 1000 * 1000)* M_p * (V_tot[i] * 1000 )**(2)  * 10**9)  # calculated to unit nPa
         i += 1
 
     meanV_tot_wind = sum(V_tot) / (len(V_x))
